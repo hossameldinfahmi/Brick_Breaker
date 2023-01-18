@@ -1,0 +1,42 @@
+:root{
+    --hue:200;
+    --saturation:50%;
+    --forground-color: hsl(var(--hue),var(--saturation), 75%);
+    --background-color: hsl(var(--hue),var(--saturation), 20%);
+
+}
+body{
+    padding: 0;
+    margin: 0;
+    background-color: var(--background-color);
+}
+
+.paddleBoard{
+    --postion: 50;
+    height: 2vh;
+    width: 20vh;
+    background-color: blueviolet;
+    position: absolute;
+    bottom: 1vh;
+    left: calc(var(--postion)*1vh);
+    transform: translateX(-50%);
+    background-color: var(--forground-color);
+}
+.ball{
+    --x:50;
+    --y:50;
+    position: absolute;
+    top: calc(var(--x) * 1vh);
+    left: calc(var(--x) * 1vh);
+    background-color: var(--forground-color);
+    transform: translate(-50%, -50%);
+
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+.container{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
