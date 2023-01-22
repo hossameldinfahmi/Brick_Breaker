@@ -157,6 +157,7 @@ function drawBricks() {
 
 // Move paddle on canvas
 function movePaddle() {
+  
   paddle.x += paddle.dx;
 
   // Wall detection
@@ -181,7 +182,6 @@ function animtionBoard(e){
 
 // Move ball on canvas
 function moveBall() {
-
   ball.x += ball.dx;
   ball.y += ball.dy;
   bgSnd.play()
@@ -244,6 +244,8 @@ function moveBall() {
     //score = 0;
     playerLife --;
     if(playerLife == 0){
+      hitSnd.pause();
+      bgSnd.pause();
       lost = 1;
       ball.dx = 0;
       ball.dy = 0;
@@ -276,7 +278,6 @@ function showAllBricks() {
 function draw() {
   // clear canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
   drawBall();
   drawPaddle();
   drawScore();
