@@ -19,10 +19,12 @@ h1 {
 }
 
 canvas {
-  background: #f0f0f0;
+  background: #000;
   display: block;
   border-radius: 5px;
 }
+
+
 
 .btn {
   cursor: pointer;

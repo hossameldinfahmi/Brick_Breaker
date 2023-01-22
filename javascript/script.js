@@ -61,6 +61,8 @@ const paddle = {
     dx: 0
 };
 
+// Draw animated bg
+
 // Create brick props
 const brickInfo = {
     w: 70,
@@ -98,20 +100,22 @@ for (let i = 0; i < brickRowCount; i++) {
 
 // Draw ball on canvas
 function drawBall() {
-    ctx.beginPath();
+  
+  ctx.beginPath();
     ctx.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2);
-    ctx.fillStyle = '#0095dd';
+  
+  ctx.fillStyle = "#37B1BC";
     ctx.fill();
     ctx.closePath();
 }
 
 // Draw paddle on canvas
 function drawPaddle() {
-    ctx.beginPath();
-    ctx.rect(paddle.x, paddle.y, paddle.w, paddle.h);
-    ctx.fillStyle = '#0095dd';
-    ctx.fill();
-    ctx.closePath();
+  ctx.beginPath();
+  ctx.rect(paddle.x, paddle.y, paddle.w, paddle.h);
+  ctx.fillStyle = '#0095dd';
+  ctx.fill();
+  ctx.closePath();
 }
 
 // Draw score oon canvas
@@ -129,13 +133,15 @@ function drawBricks() {
             ctx.beginPath();
             ctx.rect(brick.x, brick.y, brick.w, brick.h);
 
-            ctx.closePath();
+      ctx.closePath();
 
-            // ctx.fillStyle = brick.crashed == 1 ? '#000' : 'transparent';
-            // ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent';
+      // ctx.fillStyle = brick.crashed == 1 ? '#000' : 'transparent';
+      // ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent';
 
-            if (brick.crashed == 1) {
-                ctx.beginPath();
+
+
+      if(brick.crashed == 1){
+        ctx.beginPath();
 
                 ctx.moveTo(brick.x, brick.y);
                 ctx.lineTo(brick.x + 10, brick.y + 20);
@@ -150,22 +156,19 @@ function drawBricks() {
                 ctx.lineTo(brick.x + 50, brick.y + 0);
                 ctx.lineTo(brick.x + 60, brick.y + 20);
 
-                ctx.fillStyle = "rgba(199, 0, 57, 1)";
-                ctx.strokeStyle = "#000";
-                ctx.lineWidth = 2;
-                ctx.stroke();
-
-            }
-            else if (brick.visible == false) {
-                ctx.fillStyle = "transparent";
-            }
-            else {
-                ctx.fillStyle = "rgba(199, 0, 57, 1)";
-            }
-            ctx.fill();
-            ctx.closePath();
-        });
+        ctx.fillStyle = "rgba(199, 0, 57, 1)";
+        ctx.strokeStyle= "#000";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }else if (brick.visible == false ){
+        ctx.fillStyle = "transparent";
+      }else{
+        ctx.fillStyle = "rgba(199, 0, 57, 1)";
+      }
+      ctx.fill();
+      ctx.closePath();
     });
+  });
 }
 
 // Move paddle on canvas
@@ -191,9 +194,10 @@ function animtionBoard(e) {
 
 // Move ball on canvas
 function moveBall() {
-    ball.x += ball.dx;
-    ball.y += ball.dy;
-    bgSnd.play()
+
+  ball.x += ball.dx;
+  ball.y += ball.dy;
+  bgSnd.play()
 
     // Wall collision (right/left)
     if (ball.x + ball.size > canvas.width || ball.x - ball.size < 0) {
@@ -221,28 +225,28 @@ function moveBall() {
 
         column.forEach(brick => {
 
-            if (brick.visible) {
-                if (
-                    ball.x - ball.size > brick.x && // left brick side check
-                    ball.x + ball.size < brick.x + brick.w && // right brick side check
-                    ball.y + ball.size > brick.y && // top brick side check
-                    ball.y - ball.size < brick.y + brick.h // bottom brick side check
-                ) {
-                    hitSnd.play()
-                    hitSnd.play()
-                    ball.dy *= -1;
-                    brick.crashed--;
-                    console.log(brick.crashed);
+      if (brick.visible) {
+        if (
+          ball.x - ball.size > brick.x && // left brick side check
+          ball.x + ball.size < brick.x + brick.w && // right brick side check
+          ball.y + ball.size > brick.y && // top brick side check
+          ball.y - ball.size < brick.y + brick.h // bottom brick side check
+        ) {
+          hitSnd.play()
+          hitSnd.play()
+          ball.dy *= -1;
+          brick.crashed--;
 
-                    if (brick.crashed < 1) {
+          if(brick.crashed < 1 ){
 
-                        increaseScore();
-                        brick.visible = false;
-                    }
-                }
-            }
-        });
+            increaseScore();
+             brick.visible = false;
+          }
+          
+        }
+      }
     });
+  });
 
     // Hit bottom wall - Lose
     if (ball.y + ball.size > canvas.height) {
@@ -289,6 +293,35 @@ function showAllBricks() {
     });
 }
 
+function Drawbg(){
+
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+
+  for(i=0;i<50;i++){
+// arc
+    let x = Math.random() * window.innerWidth;
+    let y = Math.random() * window.innerHeight;
+    let size = getRandomInt(4);
+    ctx.beginPath();
+    ctx.arc(x, y, size,0,Math.PI * 2, false);
+    ctx.fillStyle = 'white';
+    ctx.fill();
+    ctx.shadowColor = "white";
+    ctx.shadowBlur = 15;
+    ctx.stroke();
+
+  }
+  // function animateBg() {
+  //   console.log('Hello world');
+  // }
+  //
+  // setInterval(animateBg, 1000);
+}
+
 // Keydown event
 function keyDown(e) {
     if (e.key === 'Right' || e.key === 'ArrowRight') {
@@ -314,16 +347,21 @@ function keyUp(e) {
 function draw() {
     // clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  Drawbg();
     drawBall();
     drawPaddle();
     drawScore();
     drawBricks();
+
 }
+
 
 // Update canvas drawing and animation
 function update() {
     movePaddle();
     moveBall();
+
     // Draw everything
     draw();
     requestAnimationFrame(update);
