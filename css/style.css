@@ -82,3 +82,48 @@ canvas {
   color: #fff;
   border-radius: 5px;
 }
+
+/**************** GAME OVER POPUP ****************/
+.popup{
+  font-family: 'Bungee Spice', cursive;
+  width: 400px;
+  background-color: rgb(196, 178, 178);
+  border-radius: 6px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  text-align: center;
+  padding: 0 30px 30px;
+  color: #333;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s;
+}
+.open-popup{
+  visibility: visible;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+.popup>h2{
+  font-size: 38px;
+  font-weight: 500;
+  margin: 30px 0 10px;
+}
+.popup>button{
+  font-family: 'Bungee Spice', cursive;
+  width: 100%;
+  margin-top: 50px;
+  padding: 10px 0;
+  background: brown;
+  color: #fff;
+  border: 0;
+  outline: none;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+.popup>button:hover{
+  background: rgb(188, 0, 0);
+}
