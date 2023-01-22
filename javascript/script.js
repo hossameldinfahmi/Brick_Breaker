@@ -7,6 +7,14 @@ const medBtn = document.querySelector('.med-btn');
 const hardBtn = document.querySelector('.hard-btn');
 const htmlBody = document.querySelector("body");
 const ctx = canvas.getContext('2d');
+
+// Sound Effects
+const bgSnd = new Audio("./soundEffects/bgSnd.mp3");
+const hitSnd = new Audio("./soundEffects/pop.mp3");
+
+
+// play bgsnd
+
 let score = 0;
 let playerLife = 3;
 let lost = 0;
@@ -67,6 +75,7 @@ const brickInfo = {
 // Create bricks
 const bricks = [];
 for (let i = 0; i < brickRowCount; i++) {
+
   bricks[i] = [];
   for (let j = 0; j < brickColumnCount; j++) {
     const x = i * (brickInfo.w + brickInfo.padding) + brickInfo.offsetX;
@@ -107,11 +116,34 @@ function drawBricks() {
     column.forEach(brick => {
       ctx.beginPath();
       ctx.rect(brick.x, brick.y, brick.w, brick.h);
+
+      ctx.closePath();
+
       // ctx.fillStyle = brick.crashed == 1 ? '#000' : 'transparent';
       // ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent';
 
+
+
       if(brick.crashed == 1){
-        ctx.fillStyle = "rgba(199, 0, 57, 0.5)";
+        ctx.beginPath();
+
+        ctx.moveTo(brick.x,brick.y);
+        ctx.lineTo(brick.x + 10,brick.y + 20);
+        ctx.lineTo(brick.x + 20,brick.y + 0);
+
+        ctx.lineTo(brick.x + 20,brick.y + 0);
+        ctx.lineTo(brick.x + 30,brick.y + 20);
+
+        ctx.lineTo(brick.x + 30,brick.y + 0);
+        ctx.lineTo(brick.x + 50,brick.y + 0);
+
+        ctx.lineTo(brick.x + 50,brick.y + 0);
+        ctx.lineTo(brick.x + 60,brick.y + 20);
+
+        ctx.fillStyle = "rgba(199, 0, 57, 1)";
+        ctx.strokeStyle= "#000";
+        ctx.lineWidth = 2;
+        ctx.stroke();
       }else if (brick.visible == false ){
         ctx.fillStyle = "transparent";
       }else{
@@ -142,16 +174,17 @@ htmlBody.addEventListener('mousemove', animtionBoard);
 function animtionBoard(e){
   var x =e.clientX;
   var y =e.clientY;
-
-  paddle.x = x - 400;
+  paddle.x = x - paddle.y + paddle.w;
   canvas.style.cursor="none";
 
 };
 
 // Move ball on canvas
 function moveBall() {
+
   ball.x += ball.dx;
   ball.y += ball.dy;
+  bgSnd.play()
 
   // Wall collision (right/left)
   if (ball.x + ball.size > canvas.width || ball.x - ball.size < 0) {
@@ -176,7 +209,9 @@ function moveBall() {
 
   // Brick collision
   bricks.forEach(column => {
+
     column.forEach(brick => {
+
       if (brick.visible) {
         if (
           ball.x - ball.size > brick.x && // left brick side check
@@ -184,6 +219,8 @@ function moveBall() {
           ball.y + ball.size > brick.y && // top brick side check
           ball.y - ball.size < brick.y + brick.h // bottom brick side check
         ) {
+          hitSnd.play()
+          hitSnd.play()
           ball.dy *= -1;
           brick.crashed--;
           console.log(brick.crashed);
@@ -191,6 +228,7 @@ function moveBall() {
          
 
           if(brick.crashed < 1 ){
+
             increaseScore();
              brick.visible = false;
           }
@@ -219,9 +257,11 @@ function moveBall() {
 // Increase score
 function increaseScore() {
   score++;
+
   saveToLocalStorage(score)
   if (score % (brickRowCount * brickRowCount) === 0) {
     showAllBricks();
+
   }
 }
 
