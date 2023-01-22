@@ -57,9 +57,10 @@ const paddle = {
 const brickInfo = {
   w: 70,
   h: 20,
-  padding: 10,
+  padding: 5,
   offsetX: 45,
   offsetY: 60,
+  crashed:2,
   visible: true
 };
 
@@ -106,7 +107,16 @@ function drawBricks() {
     column.forEach(brick => {
       ctx.beginPath();
       ctx.rect(brick.x, brick.y, brick.w, brick.h);
-      ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent';
+      // ctx.fillStyle = brick.crashed == 1 ? '#000' : 'transparent';
+      // ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent';
+
+      if(brick.crashed == 1){
+        ctx.fillStyle = "rgba(199, 0, 57, 0.5)";
+      }else if (brick.visible == false ){
+        ctx.fillStyle = "transparent";
+      }else{
+        ctx.fillStyle = "rgba(199, 0, 57, 1)";
+      }
       ctx.fill();
       ctx.closePath();
     });
@@ -175,9 +185,16 @@ function moveBall() {
           ball.y - ball.size < brick.y + brick.h // bottom brick side check
         ) {
           ball.dy *= -1;
-          brick.visible = false;
+          brick.crashed--;
+          console.log(brick.crashed);
 
-          increaseScore();
+         
+
+          if(brick.crashed < 1 ){
+            increaseScore();
+             brick.visible = false;
+          }
+          
         }
       }
     });
