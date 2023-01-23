@@ -117,8 +117,11 @@ function drawBall() {
   
   ctx.beginPath();
     ctx.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2);
+    var grd2 = ctx.createLinearGradient(0, 0, 50, 0);
+    grd2.addColorStop(0, "#1279C6");
+    grd2.addColorStop(1, "#179CFF");
   
-  ctx.fillStyle = "#37B1BC";
+  ctx.fillStyle = grd2;
     ctx.fill();
     ctx.closePath();
 }
@@ -127,7 +130,11 @@ function drawBall() {
 function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddle.x, paddle.y, paddle.w, paddle.h);
-  ctx.fillStyle = '#0095dd';
+    // Create gradient
+    var grd = ctx.createLinearGradient(0, 0, 500, 0);
+    grd.addColorStop(0, "#8E68E6");
+    grd.addColorStop(1, "#690F8A");
+  ctx.fillStyle = grd;
   ctx.fill();
   ctx.closePath();
 }
@@ -146,7 +153,7 @@ function drawBricks() {
         column.forEach(brick => {
             ctx.beginPath();
             ctx.rect(brick.x, brick.y, brick.w, brick.h);
-
+            // ctx.strokeRect(brick.x,brick.y,brick.w,brick.h);
       ctx.closePath();
 
       // ctx.fillStyle = brick.crashed == 1 ? '#000' : 'transparent';
@@ -170,14 +177,16 @@ function drawBricks() {
                 ctx.lineTo(brick.x + 50, brick.y + 0);
                 ctx.lineTo(brick.x + 60, brick.y + 20);
 
-        ctx.fillStyle = "rgba(199, 0, 57, 1)";
-        ctx.strokeStyle= "#000";
+        ctx.fillStyle = "#F8CC41";
+        // ctx.strokeStyle= "transparent";
         ctx.lineWidth = 2;
         ctx.stroke();
       }else if (brick.visible == false ){
         ctx.fillStyle = "transparent";
+        // ctx.strokeStyle = "transparent";
       }else{
-        ctx.fillStyle = "rgba(199, 0, 57, 1)";
+        ctx.fillStyle = "#F8CC41";
+        // ctx.strokeStyle = "#BF9B2A";
       }
       ctx.fill();
       ctx.closePath();
@@ -362,7 +371,7 @@ function draw() {
     // clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  Drawbg();
+    Drawbg();
     drawBall();
     drawPaddle();
     drawScore();
