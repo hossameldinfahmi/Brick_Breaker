@@ -28,11 +28,11 @@ easyBtn.addEventListener('click', function (e) {
     e.preventDefault();
     ball.dx = 4;
 });
-medBtn.addEventListener('click', function () {
+medBtn.addEventListener('click', function (e) {
     e.preventDefault();
     ball.dx = 12;
 });
-hardBtn.addEventListener('click', function () {
+hardBtn.addEventListener('click', function (e) {
     e.preventDefault();
     ball.dx = 20;
 })
