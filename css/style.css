@@ -3,17 +3,56 @@
 }
 
 body {
-  background-color: #0095dd;
+  padding: 0;
+  margin: 0;
+  font-family: "arcade";
+ }
+ 
+ @font-face {
+   font-family: "arcade";
+   src: url("../Gameplay.ttf");
+ }
+
+#theBody {
+  background-image: url("../Background_images/Neon_Background.png");
+  /* background-color: #0095dd; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-family: Arial, Helvetica, sans-serif;
+  /* justify-content: center; */
+  /* font-family: Arial, Helvetica, sans-serif; */
   min-height: 100vh;
   margin: 0;
 }
 
+/* background images */
+.images {
+  position: relative;
+ }
+ 
+ li {
+    display: inline; 
+   text-decoration: none; 
+ }
+ 
+ .firstCloud {
+   position: relative;
+   right: 320px;
+   top: 70px;
+ }
+ /* .secondCloud {
+   margin-top: 20px;
+ } */
+ 
+ .thirdCloud {
+   position: relative;
+   left: 235px;
+   top: 200px;
+ }
+
+
 h1 {
+  letter-spacing: 3px;
   font-size: 45px;
   color: #fff;
 }
@@ -77,13 +116,157 @@ canvas {
 .easy-btn ,
 .med-btn ,
 .hard-btn{
+  font-family: "arcade";
   cursor: pointer;
   border: 0;
   padding: 10px 20px;
-  background: #000;
-  color: #fff;
+  color: black;
+  font-weight: bold;
   border-radius: 5px;
+  margin-top: 50px;
 }
+
+/* form style */
+
+#formCont {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 9999999999;
+  /* background: wheat; */
+  /* background-image: url("./watercolor-galaxy-background_79603-2384.jpg"); */
+  /* border: 2px solid white; */
+  padding: 40px;
+  width: 400px;
+  height: 300px;
+  text-align: center;
+  /* font-family: ; */
+  /* border-radius: 20px; */
+  overflow: hidden;
+}
+
+#formCont span:nth-child(1) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #17f3fd);
+  animation: animate_one 2s linear infinite;
+}
+
+@keyframes animate_one
+{
+  0%
+  {
+    transform: translateX(-100%);
+  }
+  100%
+  {
+    transform: translateX(100%);
+  }
+}
+
+#formCont span:nth-child(2) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, #17f3fd);
+  animation: animate_two 2s linear infinite;
+  animation-delay: 1s;
+}
+
+@keyframes animate_two
+{
+  0%
+  {
+    transform: translateY(-100%);
+  }
+  100%
+  {
+    transform: translateY(100%);
+  }
+}
+
+#formCont span:nth-child(3) {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to left, transparent, #17f3fd);
+  animation: animate_three 2s linear infinite;
+}
+
+@keyframes animate_three
+{
+  0%
+  {
+    transform: translateX(100%);
+  }
+  100%
+  {
+    transform: translateX(-100%);
+  }
+}
+
+#formCont span:nth-child(4) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to top, transparent, #17f3fd);
+  animation: animate_four 2s linear infinite;
+  animation-delay: 1s;
+}
+
+@keyframes animate_four
+{
+  0%
+  {
+    transform: translateY(100%);
+  }
+  100%
+  {
+    transform: translateY(-100%);
+  }
+}
+
+
+
+#start {
+  background-color: #0b4b76;
+  color: white;
+  width: 40%;
+  height: 25px;
+  position: relative;
+  margin-top: 40px;
+  border-radius: 10px;
+}
+
+#hello {
+  background-color: wheat;
+  /* margin: auto; */
+  text-align: center;
+  padding-top: 10px;
+  position: absolute;
+  border: 1px solid black;
+  width: 200px;
+  height: 43px;
+  top: 39px;
+  left: 75%;
+  border-radius: 8px;
+}
+
+
+
+
 
 /**************** GAME OVER POPUP ****************/
 .popup{

@@ -8,6 +8,13 @@
     <title>Breakout!</title>
   </head>
   <body>
+    <div id="theBody">
+      <ul class="images">
+        <li> <img class="firstCloud" src="./Background_images/cloud.png" alt=""></li>
+        <li> <img class="secondCloud" src="./Background_images/cloud.png" alt=""></li>
+        <li> <img class="thirdCloud" src="./Background_images/cloud.png" alt=""></li>
+       </ul>
+       <div id="hello" style="display: none;"></div>
     <h1>Breakout!</h1>
     <button id="rules-btn" class="btn rules-btn">Show Rules</button>
     <div id="rules" class="rules">
@@ -19,19 +26,38 @@
       <p>If you miss the ball, your score and the blocks will reset.</p>
       <button id="close-btn" class="btn">Close</button>
     </div>
-    <div class="dificulty">
-      <button class="easy-btn">easy</button>
-      <button class="med-btn">medium</button>
-      <button class="hard-btn">hard</button>
-    </div>
-    <canvas id="canvas" width="800" height="600"></canvas>
+    <div id="dificulty">
+      <div id="formCont">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <form id="form">
+          <label for="name" style="font-weight: bold"
+            >Please enter your name:</label
+          ><br /><br />
+          <input type="text`" id="name" name="name" /><br />
+          <br />
+
+          <button class="easy-btn" style="background-color: green">Easy</button>
+          <button class="med-btn" style="background-color: orange">
+            Medium
+          </button>
+          <button class="hard-btn" style="background-color: red">Hard</button
+          ><br />
+          <input type="button" id="start" value="Start" required />
+        </form>
+      </div>
+
+
+    <canvas id="canvas" width="800" height="600" style="display: none;"></canvas>
 
     <div class="popup" id="popup">
       <h2>Game Over</h2>
       <h3 id="finalScore"></h3>
       <button type="button" onclick="repeatGame()">Repeat</button>
     </div>
-
+  </div>
 <!--    <audio controls>-->
 <!--      <source src="./soundEffects/bgSnd.mp3" type="audio/ogg">-->
 <!--    </audio>-->

@@ -9,6 +9,8 @@ const htmlBody = document.querySelector("body");
 const ctx = canvas.getContext('2d');
 const popup = document.getElementById('popup');
 const finalScore = document.getElementById('finalScore');
+const hello = document.getElementById("hello");
+const formCont = document.getElementById("formCont");
 
 // Sound Effects
 const bgSnd = new Audio("./soundEffects/bgSnd.mp3");
@@ -22,13 +24,16 @@ const brickRowCount = 9;
 const brickColumnCount = 5;
 
 //levels
-easyBtn.addEventListener('click', function () {
+easyBtn.addEventListener('click', function (e) {
+    e.preventDefault();
     ball.dx = 4;
 });
 medBtn.addEventListener('click', function () {
+    e.preventDefault();
     ball.dx = 12;
 });
 hardBtn.addEventListener('click', function () {
+    e.preventDefault();
     ball.dx = 20;
 })
 
@@ -358,12 +363,20 @@ function draw() {
 
 
 // Update canvas drawing and animation
-function update() {
+start.onclick = function update(){
+
+    hello.style.display="block";
+  canvas.style.display="block";
+  formCont.style.zIndex = -55555;
+
     movePaddle();
     moveBall();
 
     // Draw everything
     draw();
+
+    hello.innerText = 'Hi, '+document.getElementById("name").value;
+
     requestAnimationFrame(update);
 }
 
