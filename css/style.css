@@ -125,6 +125,14 @@ canvas {
   border-radius: 5px;
   margin-top: 50px;
 }
+.easy-btn:hover ,
+.med-btn:hover ,
+.hard-btn:hover{
+  filter: brightness(150%);
+}
+.toggle{
+  filter: brightness(25%);
+}
 
 /***** Beginnig form style *****/
 
@@ -244,10 +252,15 @@ canvas {
   background-color: #0b4b76;
   color: white;
   width: 40%;
-  height: 25px;
+  height: 30px;
   position: relative;
   margin-top: 40px;
   border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+#start:hover{
+  background-color: #3e6987;
 }
 
 #hello {
@@ -270,7 +283,7 @@ canvas {
 
 /**************** GAME OVER POPUP ****************/
 .popup{
-  font-family: 'Bungee Spice', cursive;
+  font-family: 'arcade';
   width: 400px;
   background-color: rgb(196, 178, 178);
   border-radius: 6px;
@@ -289,12 +302,13 @@ canvas {
   transform: translate(-50%, -50%) scale(1);
 }
 .popup>h2{
+  letter-spacing: 3px;
   font-size: 38px;
   font-weight: 500;
-  margin: 30px 0 10px;
+  margin: 30px 0 20px;
 }
 .popup>button{
-  font-family: 'Bungee Spice', cursive;
+  font-family: 'arcade';
   width: 100%;
   margin-top: 50px;
   padding: 10px 0;
@@ -303,7 +317,6 @@ canvas {
   border: 0;
   outline: none;
   font-size: 18px;
-  font-weight: bold;
   border-radius: 4px;
   cursor: pointer;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);

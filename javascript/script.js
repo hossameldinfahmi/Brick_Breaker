@@ -25,14 +25,23 @@ const brickColumnCount = 5;
 
 //levels
 easyBtn.addEventListener('click', function (e) {
+    easyBtn.classList.remove('toggle');
+    medBtn.classList.add('toggle');
+    hardBtn.classList.add('toggle');
     e.preventDefault();
     ball.dx = 4;
 });
 medBtn.addEventListener('click', function (e) {
+    medBtn.classList.remove('toggle');
+    easyBtn.classList.add('toggle');
+    hardBtn.classList.add('toggle');
     e.preventDefault();
     ball.dx = 12;
 });
 hardBtn.addEventListener('click', function (e) {
+    hardBtn.classList.remove('toggle');
+    easyBtn.classList.add('toggle');
+    medBtn.classList.add('toggle');
     e.preventDefault();
     ball.dx = 20;
 })
