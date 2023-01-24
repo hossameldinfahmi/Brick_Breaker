@@ -59,17 +59,17 @@ closeBtn.addEventListener('click', () => rules.classList.remove('show'));
 const ball = {
     x: canvas.width / 2,
     y: canvas.height / 2,
-    size: 10,
+    size: 6,
     speed: 4,
-    dx: 4,
-    dy: -4
+    dx: 2,
+    dy: -2
 };
 
 // Create paddle props
 const paddle = {
     x: canvas.width / 2 - 40,
     y: canvas.height - 20,
-    w: 80,
+    w: 120,
     h: 10,
     speed: 8,
     dx: 0
@@ -81,7 +81,7 @@ const paddle = {
 const brickInfo = {
     w: 70,
     h: 20,
-    padding: 5,
+    padding: 10,
     offsetX: 45,
     offsetY: 60,
     crashed: 2,
@@ -235,13 +235,32 @@ function moveBall() {
     // console.log(ball.x, ball.y);
 
     // Paddle collision
+
+
     if (
-        ball.x - ball.size > paddle.x &&
-        ball.x + ball.size < paddle.x + paddle.w &&
+        ball.x + ball.size > paddle.x &&
+        ball.x < paddle.x + paddle.w / 3 &&
+        ball.y + ball.size > paddle.y
+    ) {
+        ball.dy = -ball.speed;
+        ball.dx = -ball.speed;
+    }else if(
+        ball.x + ball.size > paddle.x + paddle.w / 1.5  &&
+         ball.x < paddle.x + paddle.w &&
+        ball.y + ball.size > paddle.y
+    ) {
+        ball.dy = -ball.speed;
+        ball.dx = +ball.speed;
+    }else if(
+        ball.x + ball.size > paddle.x &&
+        ball.x < paddle.x + paddle.w &&
         ball.y + ball.size > paddle.y
     ) {
         ball.dy = -ball.speed;
     }
+
+
+
 
     // Brick collision
     bricks.forEach(column => {
@@ -250,11 +269,22 @@ function moveBall() {
 
       if (brick.visible) {
         if (
-          ball.x - ball.size > brick.x && // left brick side check
-          ball.x + ball.size < brick.x + brick.w && // right brick side check
+          ball.x + ball.size > brick.x && // left brick side check
+          ball.x < brick.x + brick.w && // rig  ht brick side check
           ball.y + ball.size > brick.y && // top brick side check
-          ball.y - ball.size < brick.y + brick.h // bottom brick side check
+          ball.y < brick.y + brick.h &&  // bottom brick side check
+            ball.y < brick.y + brick.w && // top of ball and right of brick
+            ball.y + ball.size  < brick.y + brick.w && // bottom of ball and right of brick
+            ball.y > brick.y && // top of ball and left of brick
+            ball.y + ball.size  > brick.y  // bottom of ball and left of brick
+
         ) {
+            console.log(ball.x);
+            console.log(ball.y);
+            // console.log(ball.size);
+            console.log(brick.x);
+            console.log(brick.y);
+            console.log("========");
           hitSnd.play()
           hitSnd.play()
           ball.dy *= -1;
