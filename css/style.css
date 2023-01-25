@@ -39,16 +39,59 @@ body {
    position: relative;
    right: 320px;
    top: 70px;
+
+   animation: cloud_one 9s linear infinite;
  }
- /* .secondCloud {
+
+ @keyframes cloud_one
+ {
+   0%
+   {
+     transform: translateX(1080px);
+   }
+   100%
+   {
+     transform: translateX(-700px);
+   }
+ }
+
+
+ .secondCloud {
    margin-top: 20px;
- } */
+   animation: cloud_two 11s linear infinite;
+   /* animation-delay: 0.5s; */
+ }
+
+ @keyframes cloud_two
+{
+  0%
+  {
+    transform: translateX(650px);
+  }
+  100%
+  {
+    transform: translateX(-1200px);
+  }
+}
  
  .thirdCloud {
    position: relative;
    left: 235px;
    top: 200px;
+   animation: cloud_three 10s linear infinite;
  }
+
+ @keyframes cloud_three
+ {
+   0%
+   {
+     transform: translateX(410px);
+   }
+   100%
+   {
+     transform: translateX(-1080px);
+   }
+ } 
 
 
 h1 {
