@@ -15,7 +15,7 @@ const hitSnd = new Audio("./soundEffects/pop.mp3");
 
 // globals
 let score = 0;
-let playerLife = 10;
+let playerLife = 3;
 let countRemainingBricks = 45;
 // startMenu, gameWaiting, gameRunning, gameDone
 let stage = 'startMenu';
