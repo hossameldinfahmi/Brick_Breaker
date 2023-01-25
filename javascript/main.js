@@ -16,6 +16,7 @@ const hitSnd = new Audio("./soundEffects/pop.mp3");
 // globals
 let score = 0;
 let playerLife = 3;
+let countRemainingBricks = 45;
 // startMenu, gameWaiting, gameRunning, gameDone
 let stage = 'startMenu';
 
@@ -180,6 +181,10 @@ function handleCollision() {
                     if (brick.crashed < 1) {
                         increaseScore();
                         brick.visible = false;
+                        countRemainingBricks --;
+                    }
+                    if(countRemainingBricks == 0){
+                        console.log('game over')   
                     }
                 }
             }

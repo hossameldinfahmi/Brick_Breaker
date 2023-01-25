@@ -13,7 +13,7 @@ class Bricks {
             }
         }
     }
-
+    
     // Draw bricks on canvas
     draw() {
         this.bricks.forEach(column => {
