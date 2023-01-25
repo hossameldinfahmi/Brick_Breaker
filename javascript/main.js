@@ -8,14 +8,14 @@ const finalScore = document.getElementById('finalScore');
 const hello = document.getElementById("hello");
 const formCont = document.getElementById("formCont");
 const levelBtns = Array.from(document.getElementsByClassName('level-btn'));
-
+const popupHeader = document.querySelector('.pop-up-header')
 // Sound Effects
 const bgSnd = new Audio("./soundEffects/bgSnd.mp3");
 const hitSnd = new Audio("./soundEffects/pop.mp3");
 
 // globals
 let score = 0;
-let playerLife = 3;
+let playerLife = 10;
 let countRemainingBricks = 45;
 // startMenu, gameWaiting, gameRunning, gameDone
 let stage = 'startMenu';
@@ -184,7 +184,10 @@ function handleCollision() {
                         countRemainingBricks --;
                     }
                     if(countRemainingBricks == 0){
-                        console.log('game over')   
+                        popupHeader.textContent = 'Congrats for winning';
+                        finalScore.innerText = `Your Score: ${score}`;
+                        popup.classList.add("open-popup");
+                        console.log('Congrats');   
                     }
                 }
             }
