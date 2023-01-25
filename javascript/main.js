@@ -276,7 +276,7 @@ start.onclick = () => {
     canvas.style.display = "block";
     formCont.style.zIndex = -55555;
 
-    let name = document.getElementById("name").value || 'there';
+    let name = document.getElementById("name").value || 'User';
     hello.innerText = 'Hi, ' + name;
 
     // update game stage to wait for space before starting
