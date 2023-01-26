@@ -186,8 +186,7 @@ function handleCollision() {
                     if(countRemainingBricks == 0){
                         popupHeader.textContent = 'Congrats for winning';
                         finalScore.innerText = `Your Score: ${score}`;
-                        popup.classList.add("open-popup");
-                        console.log('Congrats');   
+                        popup.classList.add("open-popup");   
                     }
                 }
             }
