@@ -67,6 +67,18 @@ const bricks = new Bricks(9, 5, {
     offsetX: 45,
     offsetY: 60,
     crashed: 2,
+    hasBonus: false,
+    visible: true
+});
+
+// Create ball props
+const bonusCoin = new BonuseLife({
+    // position at the middle of the paddle
+    x: canvas.width/2,
+    y: canvas.height / 8,
+    size: 14,
+    speed: 4,
+    dy: 1,
     visible: true
 });
 
@@ -159,6 +171,20 @@ function handleCollision() {
         ball.dy = -1;
     }
 
+    // Bounse paddle collision 
+    if (
+        bonusCoin.x + bonusCoin.size > paddle.x &&
+        bonusCoin.x < paddle.x + paddle.w &&
+        bonusCoin.y + bonusCoin.size > paddle.y
+    ) {
+        playerLife++;
+        bonusCoin.visible = false;
+        bonusCoin.dy = -1;
+        bonusCoin.dx = +1;
+       
+        
+    }
+
     // Brick collision
     bricks.bricks.forEach(column => {
         column.forEach(brick => {
@@ -178,10 +204,21 @@ function handleCollision() {
                     ball.dy *= -1;
                     brick.crashed--;
 
+                    var randBrick = getRandomInt(45);
+
+                    if(randBrick == 2){
+                        brick.hasBonus = true;
+                        bonusCoin.x = brick.x;
+                        bonusCoin.y = brick.y;
+                        console.log(randBrick)
+                        console.log(brick.hasBonus)
+
+                    }
                     if (brick.crashed < 1) {
                         increaseScore();
                         brick.visible = false;
                         countRemainingBricks --;
+    
                     }
                     if(countRemainingBricks == 0){
                         popupHeader.textContent = 'Congrats for winning';
@@ -192,6 +229,9 @@ function handleCollision() {
             }
         });
     });
+
+    // Bounse collision
+
 
     // Hit bottom wall - Lose
     if (ball.y + ball.size > canvas.height) {

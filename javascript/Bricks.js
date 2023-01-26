@@ -25,6 +25,7 @@ class Bricks {
                 if (brick.crashed == 1) {
                     ctx.beginPath();
 
+                    // Chrash Shape Draw
                     ctx.moveTo(brick.x, brick.y);
                     ctx.lineTo(brick.x + 10, brick.y + 20);
                     ctx.lineTo(brick.x + 20, brick.y + 0);
@@ -44,6 +45,11 @@ class Bricks {
                     ctx.stroke();
                 } else if (brick.visible == false) {
                     ctx.fillStyle = "transparent";
+                    if(brick.hasBonus == true){                        
+                        bonusCoin.draw();
+                        bonusCoin.move();
+                    }
+
                 } else {
                     ctx.fillStyle = "#F8CC41";
                 }
@@ -59,6 +65,4 @@ class Bricks {
             column.forEach(brick => (brick.visible = true));
         });
     }
-
-
 }
