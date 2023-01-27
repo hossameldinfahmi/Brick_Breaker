@@ -68,6 +68,7 @@ const bricks = new Bricks(9, 5, {
     offsetY: 60,
     crashed: 2,
     hasBonus: false,
+    breakable:true,
     visible: true
 });
 
@@ -185,10 +186,18 @@ function handleCollision() {
         
     }
 
+    // brick.bricks[1][2].breakable= false;
+      
+    
+    
     // Brick collision
     bricks.bricks.forEach(column => {
         column.forEach(brick => {
-            if (brick.visible) {
+            
+
+
+            if (brick.visible && brick.breakable == true) {
+                
                 if (
                     ball.x + ball.size > brick.x && // left brick side check
                     ball.x < brick.x + brick.w && // right brick side check
@@ -199,9 +208,30 @@ function handleCollision() {
                     ball.y > brick.y && // top of ball and left of brick
                     ball.y + ball.size > brick.y  // bottom of ball and left of brick
                 ) {
+
+                    // if(brick.breakable == false){
+                    //     brick.visible = ture;
+                    //     ball.dy *= -1;
+                    //     brick.crashed = 2;
+                    // }
+                    // if(
+                    //     ball.x + ball.size > brick.x && // left brick side check
+                    //     ball.x < brick.x + brick.w  // right brick side check
+                    // ){
+                    //     ball.dx *= -1;
+                    // }else{
+                            
+                    // }
+                     ball.dy *= -1;
+
+                    
+                    
+
                     hitSnd.play()
                     hitSnd.play()
-                    ball.dy *= -1;
+                 
+                  
+                   
                     brick.crashed--;
 
                     var randBrick = getRandomInt(45);
@@ -214,6 +244,10 @@ function handleCollision() {
                         console.log(brick.hasBonus)
 
                     }
+                    // if(randBrick == 3){
+                    //    brick.breakable = false;
+
+                    // }
                     if (brick.crashed < 1) {
                         increaseScore();
                         brick.visible = false;
@@ -223,11 +257,7 @@ function handleCollision() {
                     if(countRemainingBricks == 0){
                         popupHeader.textContent = 'Congrats for winning';
                         finalScore.innerText = `Your Score: ${score}`;
-                        popup.classList.add("open-popup"); 
-                        document.removeEventListener('keydown');
-                        document.removeEventListener('keyup');
-                        document.removeEventListener('mousemove');
-                        document.removeEventListener('mousedown');  
+                        popup.classList.add("open-popup");   
                     }
                 }
             }
