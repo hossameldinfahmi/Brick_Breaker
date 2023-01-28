@@ -429,3 +429,5 @@ start.onclick = function update(){
 }
 
 update();
+
+console.log(bricks[0][1]);
