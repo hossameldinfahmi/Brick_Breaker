@@ -284,7 +284,7 @@ function handleCollision() {
                 ) {
 
                      ball.dy *= -1;
-                     ball.dx *= -1;
+            
                     hitSnd.play()
                     hitSnd.play()
 }
