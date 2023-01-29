@@ -63,8 +63,8 @@ const ball = new Ball({
 const bricks = new Bricks(9, 5, {
   w: 70,
   h: 20,
-  padding: 15,
-  offsetX: 25,
+  padding: 20,
+  offsetX: 0,
   offsetY: 60,
   crashed: 2,
   hasBonus: false,
@@ -262,7 +262,7 @@ function handleCollision() {
           ball.y + ball.size > brick.y // bottom of ball and left of brick
         ) {
 
-            if (ball.x < brick.x || ball.x > brick.x + brick.w) {
+            if (ball.x + ball.size < brick.x || ball.x > brick.x + brick.w ) {
                 ball.dx *= -1;
               } else {
                 ball.dy *= -1;
