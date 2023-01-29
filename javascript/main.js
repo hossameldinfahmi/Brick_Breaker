@@ -178,7 +178,9 @@ function handleCollision() {
         bonusCoin.x < paddle.x + paddle.w &&
         bonusCoin.y + bonusCoin.size > paddle.y
     ) {
-        playerLife++;
+        if(playerLife <10){
+            playerLife++;
+        }
         bonusCoin.visible = false;
         bonusCoin.dy = -1;
         bonusCoin.dx = +1;
