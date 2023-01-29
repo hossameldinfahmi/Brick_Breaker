@@ -15,7 +15,8 @@ body {
 
 #theBody {
   background-image: url("../Background_images/Neon_Background.png");
-  /* background-color: #0095dd; */
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -301,6 +302,7 @@ canvas {
   border-radius: 10px;
   cursor: pointer;
   font-size: 18px;
+  font-family: "arcade";
 }
 #start:hover{
   background-color: #3e6987;
