@@ -29,7 +29,7 @@ levelBtns.forEach((levelBtn, index) => {
     e.target.classList.remove("toggle");
     e.preventDefault();
     // increase speed based on index: [easy, medium, hard]
-    ball.speed = 4 * (index + 1);
+    ball.speed = 2 * (index + 1);
   });
 });
 
@@ -53,7 +53,7 @@ const ball = new Ball({
   x: paddle.x + paddle.w / 2,
   y: paddle.y - paddle.h,
   size: 8,
-  speed: 4,
+  speed: 1,
   // right:1, left:-1, stop:0
   dx: 0,
   dy: 0,
@@ -149,38 +149,52 @@ function handleCollision() {
     ball.dy *= -1;
   }
 
-  // Paddle collision
-  if (
-    ball.x + ball.size > paddle.x &&
-    ball.x < paddle.x + paddle.w / 3 &&
-    ball.y + ball.size > paddle.y
-  ) {
-    ball.dy = -1;
-    ball.dx = -1;
-  } else if (
-    ball.x + ball.size > paddle.x + paddle.w / 1.5 &&
-    ball.x < paddle.x + paddle.w &&
-    ball.y + ball.size > paddle.y
-  ) {
-    ball.dy = -1;
-    ball.dx = +1;
-  } else if (
-    ball.x + ball.size > paddle.x &&
-    ball.x < paddle.x + paddle.w &&
-    ball.y + ball.size > paddle.y
-  ) {
-    ball.dy = -1;
-  }
-//   function ballPaddelCollision() {
+//   // Paddle collision
 //   if (
-//     ball.x < paddel.x + paddel.width &&
-//     ball.x > paddel.x &&
-//     ball.y + ball.radius < paddel.y + paddel.height &&
-//     ball.y + ball.radius > paddel.y
+//     ball.x + ball.size > paddle.x &&
+//     ball.x < paddle.x + paddle.w / 3 &&
+//     ball.y + ball.size > paddle.y
+//   ) {
+//     ball.dy = -1;
+//     ball.dx = -1;
+//   } else if (
+//     ball.x + ball.size > paddle.x + paddle.w / 1.5 &&
+//     ball.x < paddle.x + paddle.w &&
+//     ball.y + ball.size > paddle.y
+//   ) {
+//     ball.dy = -1;
+//     ball.dx = +1;
+//   } else if (
+//     ball.x + ball.size > paddle.x &&
+//     ball.x < paddle.x + paddle.w &&
+//     ball.y + ball.size > paddle.y
+//   ) {
+//     ball.dy = -1;
+//   }
+
+  if (
+    ball.x < paddle.x + paddle.w &&
+    ball.x > paddle.x &&
+    ball.y + ball.size < paddle.y + paddle.h &&
+    ball.y + ball.size > paddle.y
+  ) {
+    let collidePoint = ball.x - (paddle.x + paddle.w / 2);
+    collidePoint = collidePoint / (paddle.w / 2);
+    let angel = (collidePoint * Math.PI) / 3;
+    ball.dx = ball.speed * Math.sin(angel);
+    ball.dy = -ball.speed * Math.cos(angel);
+  }
+
+//   function ballpaddleCollision() {
+//   if (
+//     ball.x < paddle.x + paddle.width &&
+//     ball.x > paddle.x &&
+//     ball.y + ball.radius < paddle.y + paddle.height &&
+//     ball.y + ball.radius > paddle.y
 //   ) {
 //     if (playsound) PADDLE_HIT.play();
-//     let collidePoint = ball.x - (paddel.x + paddel.width / 2);
-//     collidePoint = collidePoint / (paddel.width / 2);
+//     let collidePoint = ball.x - (paddle.x + paddle.width / 2);
+//     collidePoint = collidePoint / (paddle.width / 2);
 //     let angel = (collidePoint * Math.PI) / 3;
 //     ball.dx = ball.speed * Math.sin(angel);
 //     ball.dy = -ball.speed * Math.cos(angel);
@@ -195,10 +209,8 @@ function handleCollision() {
     bonusCoin.y < paddle.y + paddle.h
   ) {
     if (playerLife < 4) {
-        if(playerLife <10){
-            playerLife++;
+        playerLife++;
     }
-        }
     bonusCoin.visible = false;
     bonusCoin.dy = -1;
     bonusCoin.dx = +1;
