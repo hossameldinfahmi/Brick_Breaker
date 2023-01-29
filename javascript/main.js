@@ -254,10 +254,14 @@ function handleCollision() {
                         countRemainingBricks --;
     
                     }
-                    if(countRemainingBricks == 0){
+                    if(countRemainingBricks == 6){
                         popupHeader.textContent = 'Congrats for winning';
                         finalScore.innerText = `Your Score: ${score}`;
                         popup.classList.add("open-popup");   
+                        bgSnd.pause();
+                        ball.dx = 0;
+                        ball.dy = 0;
+                        stage = 'gameDone';
                     }
                 }
             }
@@ -307,7 +311,6 @@ function handleCollision() {
         paddle.y = canvas.height - 20;
         ball.x = paddle.x + paddle.w / 2;
         ball.y = paddle.y - paddle.h;
-
         playerLife--;
         if (playerLife == 0) {
             gameOver();
