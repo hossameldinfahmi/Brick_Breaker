@@ -348,6 +348,9 @@ function mouseClicked() {
 
 // Keydown event to move paddle and start game
 function keyDown(e) {
+    if (e.key === ' ' || e.key === 'Space' || e.key === 'Enter'){
+        e.preventDefault();
+    }
     if (e.key === 'Right' || e.key === 'ArrowRight') {
         paddle.dx = 1;
     } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
@@ -397,10 +400,7 @@ start.onclick = () => {
     drawAnimation();
 }
 
-/**
- * TODO: investigate weird behavior: need to click anywhere in the document
- * after the start menu for the space mouse to be detected and start moving paddle
- */
+// Press space or click to start moving
 function drawAnimation() {
     if (['gameWaiting', 'gameRunning'].includes(stage)) {
         draw();
