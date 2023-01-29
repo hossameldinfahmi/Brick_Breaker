@@ -282,11 +282,11 @@ function handleCollision() {
                     ball.x + ball.size > brick.x && // left brick side check
                     ball.x < brick.x + brick.w && // right brick side check
                     ball.y + ball.size > brick.y && // top brick side check
-                    ball.y < brick.y + brick.h &&  // bottom brick side check
-                    ball.y < brick.y + brick.w && // top of ball and right of brick
-                    ball.y + ball.size < brick.y + brick.w && // bottom of ball and right of brick
-                    ball.y > brick.y && // top of ball and left of brick
-                    ball.y + ball.size > brick.y  // bottom of ball and left of brick
+                    ball.y < brick.y + brick.h   // bottom brick side check
+                    // ball.y < brick.y + brick.w && // top of ball and right of brick
+                    // ball.y + ball.size < brick.y + brick.w && // bottom of ball and right of brick
+                    // ball.y > brick.y && // top of ball and left of brick
+                    // ball.y + ball.size > brick.y  // bottom of ball and left of brick
                 ) {
 
                      ball.dy *= -1;
