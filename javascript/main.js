@@ -60,10 +60,10 @@ const ball = new Ball({
 });
 
 // Create brick props
-const bricks = new Bricks(9, 5, {
-  w: 70,
+const bricks = new Bricks(7, 5, {
+  w: 60,
   h: 20,
-  padding: 10,
+  padding: 45,
   offsetX: 45,
   offsetY: 60,
   crashed: 2,
@@ -261,14 +261,21 @@ function handleCollision() {
           ball.y > brick.y && // top of ball and left of brick
           ball.y + ball.size > brick.y // bottom of ball and left of brick
         ) {
-            if(ball.y + ball.size  < brick.y || ball.y < brick.y + brick.h){
-                ball.dy *= -1;
-            }
+            
+            // if (ball.x + ball.size > brick.x || ball.x < brick.x + brick.w ) {
+            //     ball.dx *= -1;
+            //   } else{
+            //     console.log("up and down");
+            //     ball.dy*=-1;
+            //   }
 
-            if (ball.x + ball.size  > brick.x || ball.x < brick.x + brick.w) {
+
+            if (ball.x < brick.x) {
                 ball.dx *= -1;
-              } else {
-               
+              } else if(ball.x + ball.size > brick.x + brick.w){
+                ball.dx *= -1;
+              }else {
+                ball.dy *= -1;
               }
 
           hitSnd.play();
@@ -307,6 +314,7 @@ function handleCollision() {
       }
     });
   });
+  
 
   bricks.bricks.forEach((column) => {
     column.forEach((brick) => {
