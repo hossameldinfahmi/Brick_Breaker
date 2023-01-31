@@ -21,7 +21,10 @@ heartImg.src = "https://www.freepnglogos.com/uploads/heart-png/heart-image-13.pn
 // globals
 let score = 0;
 let playerLife = 3;
-let countRemainingBricks = 45;
+let countRow = 5;
+let countCol = 8;
+let unBreakable = 2;
+let countRemainingBricks = (countRow * countCol) - unBreakable;
 // startMenu, gameWaiting, gameRunning, gameDone
 let stage = "startMenu";
 
@@ -67,7 +70,7 @@ const ball = new Ball({
 
 
 // Create brick props
-const bricks = new Bricks(8, 5, {
+const bricks = new Bricks(countCol, countRow, {
   w: 90,
   h: 20,
   padding: 0,
@@ -309,7 +312,7 @@ function handleCollision() {
             brick.visible = false;
             countRemainingBricks--;
           }
-          if (countRemainingBricks == 6) {
+          if (countRemainingBricks == 0) {
             popupHeader.textContent = "Congrats for winning";
             finalScore.innerText = `Your Score: ${score}`;
             popup.classList.add("open-popup");
