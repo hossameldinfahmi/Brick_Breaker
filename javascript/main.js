@@ -60,7 +60,7 @@ const ball = new Ball({
   // position at the middle of the paddle
   x: paddle.x + paddle.w / 2,
   y: paddle.y - paddle.h,
-  size: 8,
+  size: 7,
   speed: 1,
   // right:1, left:-1, stop:0
   dx: 0,
