@@ -37,7 +37,7 @@ levelBtns.forEach((levelBtn, index) => {
     e.target.classList.remove("toggle");
     e.preventDefault();
     // increase speed based on index: [easy, medium, hard]
-    ball.speed += 4;
+    ball.speed = 1 * (index + 1);
   });
 });
 
@@ -61,7 +61,7 @@ const ball = new Ball({
   x: paddle.x + paddle.w / 2,
   y: paddle.y - paddle.h,
   size: 8,
-  speed: 5,
+  speed: 1,
   // right:1, left:-1, stop:0
   dx: 0,
   dy: 0,
