@@ -134,6 +134,9 @@ canvas {
   position: absolute;
   top: 30px;
   left: 30px;
+  background-color: orange;
+  font-family: 'arcade';
+
 }
 
 .rules {
@@ -198,6 +201,9 @@ canvas {
   /* font-family: ; */
   /* border-radius: 20px; */
   overflow: hidden;
+}
+form label{
+  color: antiquewhite;
 }
 
 #formCont span:nth-child(1) {

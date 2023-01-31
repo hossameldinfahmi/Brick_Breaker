@@ -15,7 +15,7 @@ const hitSnd = new Audio("./soundEffects/pop.mp3");
 
 // Bonuce Image
 const heartImg = new Image();
-heartImg.src = ".././imgs/heart.png";
+heartImg.src = "https://www.freepnglogos.com/uploads/heart-png/heart-image-13.png";
 
 
 // globals
@@ -45,7 +45,7 @@ closeBtn.addEventListener("click", () => rules.classList.remove("show"));
 const paddle = new Paddle({
   x: canvas.width / 2 - 40,
   y: canvas.height - 20,
-  w: 120,
+  w: 160,
   h: 10,
   // right:1, left:-1, stop:0
   dx: 0,
@@ -65,11 +65,12 @@ const ball = new Ball({
 });
 
 
+
 // Create brick props
-const bricks = new Bricks(7, 5, {
-  w: 60,
+const bricks = new Bricks(8, 5, {
+  w: 90,
   h: 20,
-  padding: 45,
+  padding: 0,
   offsetX: 45,
   offsetY: 60,
   crashed: 2,
@@ -77,6 +78,7 @@ const bricks = new Bricks(7, 5, {
   breakable: true,
   visible: true,
 });
+
 
 // Create ball props
 const bonusCoin = new BonuseLife({
@@ -120,8 +122,9 @@ function drawBg() {
     ctx.fillStyle = "white";
     ctx.fill();
     ctx.shadowColor = "white";
-    ctx.shadowBlur = 15;
+    ctx.shadowBlur = 5;
     ctx.stroke();
+    
     
   }
 }
@@ -265,11 +268,7 @@ function handleCollision() {
           ball.x + ball.size > brick.x && // left brick side check
           ball.x < brick.x + brick.w && // right brick side check
           ball.y + ball.size > brick.y && // top brick side check
-          ball.y < brick.y + brick.h && // bottom brick side check
-          ball.y < brick.y + brick.w && // top of ball and right of brick
-          ball.y + ball.size < brick.y + brick.w && // bottom of ball and right of brick
-          ball.y > brick.y && // top of ball and left of brick
-          ball.y + ball.size > brick.y // bottom of ball and left of brick
+          ball.y < brick.y + brick.h  // bottom brick side check
         ) {
             
             // if (ball.x + ball.size > brick.x || ball.x < brick.x + brick.w ) {
@@ -288,18 +287,18 @@ function handleCollision() {
                 ball.dy *= -1;
               }
 
+          
           hitSnd.play();
           hitSnd.play();
 
           brick.crashed--;
 
-          var randBrick = getRandomInt(15);
+          var randBrick = getRandomInt(25);
 
           if (randBrick == 2) {
             brick.hasBonus = true;
             bonusCoin.x = brick.x;
             bonusCoin.y = brick.y;
-            console.log("true");
           }
           // if(randBrick == 3){
           //    brick.breakable = false;
@@ -330,23 +329,15 @@ function handleCollision() {
       if (brick.breakable == false) {
         // ctx.fillStyle = "#ffff";
         if (
-          ball.x + ball.size > brick.x && // left brick side check
+          ball.x + ball.size  > brick.x && // left brick side check
           ball.x < brick.x + brick.w && // right brick side check
           ball.y + ball.size > brick.y && // top brick side check
-          ball.y < brick.y + brick.h && // bottom brick side check
-          ball.y < brick.y + brick.w && // top of ball and right of brick
-          ball.y + ball.size < brick.y + brick.w && // bottom of ball and right of brick
-          ball.y > brick.y && // top of ball and left of brick
-          ball.y + ball.size > brick.y  // bottom of ball and left of brick
+          ball.y < brick.y + brick.h  // bottom brick side check
+
         ) {
-            if (ball.x < brick.x) {
-                ball.dx *= -1;
-            } else if(ball.x + ball.size > brick.x + brick.w){
-                ball.dx *= -1;
-            }else {
-                ball.dy *= -1;
-            }
-          hitSnd.play();
+          ball.dx *= -1;
+          ball.dy *= -1;
+        
           hitSnd.play();
         }
       }
