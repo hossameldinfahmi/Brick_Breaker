@@ -338,8 +338,13 @@ function handleCollision() {
           ball.y < brick.y + brick.h  // bottom brick side check
 
         ) {
-          ball.dx *= -1;
-          ball.dy *= -1;
+          if (ball.x < brick.x) {
+            ball.dx *= -1;
+          } else if(ball.x + ball.size > brick.x + brick.w){
+            ball.dx *= -1;
+          }else {
+            ball.dy *= -1;
+          }
         
           hitSnd.play();
         }
