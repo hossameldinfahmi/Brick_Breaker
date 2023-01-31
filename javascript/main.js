@@ -22,7 +22,7 @@ heartImg.src = "https://www.freepnglogos.com/uploads/heart-png/heart-image-13.pn
 let score = 0;
 let playerLife = 3;
 let countRow = 5;
-let countCol = 8;
+let countCol = 9;
 let unBreakable = 2;
 let countRemainingBricks = (countRow * countCol) - unBreakable;
 // startMenu, gameWaiting, gameRunning, gameDone
@@ -50,7 +50,6 @@ const paddle = new Paddle({
   y: canvas.height - 20,
   w: 160,
   h: 10,
-  // right:1, left:-1, stop:0
   dx: 0,
   speed: 4,
 });
@@ -62,7 +61,6 @@ const ball = new Ball({
   y: paddle.y - paddle.h,
   size: 7,
   speed: 1,
-  // right:1, left:-1, stop:0
   dx: 0,
   dy: 0,
 });
@@ -71,7 +69,7 @@ const ball = new Ball({
 
 // Create brick props
 const bricks = new Bricks(countCol, countRow, {
-  w: 90,
+  w: 80,
   h: 20,
   padding: 0,
   offsetX: 45,
@@ -156,7 +154,7 @@ function increaseScore() {
 function handleCollision() {
   // Wall collision (right/left)
   if (ball.x + ball.size > canvas.width || ball.x - ball.size < 0) {
-    ball.dx *= -1; // ball.dx = ball.dx * -1
+    ball.dx *= -1; 
   }
 
   // Wall collision (top/bottom)
@@ -164,28 +162,6 @@ function handleCollision() {
     ball.dy *= -1;
   }
 
-//   // Paddle collision
-//   if (
-//     ball.x + ball.size > paddle.x &&
-//     ball.x < paddle.x + paddle.w / 3 &&
-//     ball.y + ball.size > paddle.y
-//   ) {
-//     ball.dy = -1;
-//     ball.dx = -1;
-//   } else if (
-//     ball.x + ball.size > paddle.x + paddle.w / 1.5 &&
-//     ball.x < paddle.x + paddle.w &&
-//     ball.y + ball.size > paddle.y
-//   ) {
-//     ball.dy = -1;
-//     ball.dx = +1;
-//   } else if (
-//     ball.x + ball.size > paddle.x &&
-//     ball.x < paddle.x + paddle.w &&
-//     ball.y + ball.size > paddle.y
-//   ) {
-//     ball.dy = -1;
-//   }
 
   if (
     ball.x < paddle.x + paddle.w &&
@@ -199,21 +175,6 @@ function handleCollision() {
     ball.dx = ball.speed * Math.sin(angel);
     ball.dy = -ball.speed * Math.cos(angel);
   }
-
-//   function ballpaddleCollision() {
-//   if (
-//     ball.x < paddle.x + paddle.width &&
-//     ball.x > paddle.x &&
-//     ball.y + ball.radius < paddle.y + paddle.height &&
-//     ball.y + ball.radius > paddle.y
-//   ) {
-//     if (playsound) PADDLE_HIT.play();
-//     let collidePoint = ball.x - (paddle.x + paddle.width / 2);
-//     collidePoint = collidePoint / (paddle.width / 2);
-//     let angel = (collidePoint * Math.PI) / 3;
-//     ball.dx = ball.speed * Math.sin(angel);
-//     ball.dy = -ball.speed * Math.cos(angel);
-//   }
 
 
   // Bounse paddle collision
@@ -232,35 +193,6 @@ function handleCollision() {
   }
 
 
-//   function ballBrickCollision() {
-//     for (var c = 0; c < colCount; c++) {
-//       for (var r = 0; r < rowCount; r++) {
-//         var brick = bricks[c][r];
-//         if (brick.status == 1 || brick.status == 2 || brick.status == 3) {
-//           if (
-//             ball.x + ball.radius > brick.x &&
-//             ball.x - ball.radius < brick.x + brick.width &&
-//             ball.y + ball.radius > brick.y &&
-//             ball.y - ball.radius < brick.y + brick.height
-//           ) {
-//             if (ball.x < brick.x || ball.x > brick.x + brick.width) {
-//               ball.dx *= -1;
-//             } else {
-//               ball.dy *= -1;
-//             }
-//             if (playsound) BRICK_HIT.play();
-//             if(brick.status === 3) return;
-//             if(brick.status==1)
-//               numBricks -= 1;
-//             brick.status -= 1;
-//             gameScore += 10;
-//             // generatePowers(brick);
-//           }
-//         }
-//       }
-//     }
-
-
   // Brick collision
   bricks.bricks.forEach((column) => {
     column.forEach((brick) => {
@@ -274,12 +206,6 @@ function handleCollision() {
           ball.y < brick.y + brick.h  // bottom brick side check
         ) {
             
-            // if (ball.x + ball.size > brick.x || ball.x < brick.x + brick.w ) {
-            //     ball.dx *= -1;
-            //   } else{
-            //     console.log("up and down");
-            //     ball.dy*=-1;
-            //   }
 
 
             if (ball.x < brick.x) {
@@ -303,10 +229,7 @@ function handleCollision() {
             bonusCoin.x = brick.x;
             bonusCoin.y = brick.y;
           }
-          // if(randBrick == 3){
-          //    brick.breakable = false;
 
-          // }
           if (brick.crashed < 1) {
             increaseScore();
             brick.visible = false;
@@ -338,13 +261,8 @@ function handleCollision() {
           ball.y < brick.y + brick.h  // bottom brick side check
 
         ) {
-          if (ball.x < brick.x) {
-            ball.dx *= -1;
-          } else if(ball.x + ball.size > brick.x + brick.w){
-            ball.dx *= -1;
-          }else {
-            ball.dy *= -1;
-          }
+          ball.dx *= -1;
+          ball.dy *= -1;
         
           hitSnd.play();
         }

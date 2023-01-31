@@ -12,8 +12,8 @@ class Bricks {
                 this.bricks[i][j] = { x, y, ...this.brickInfo };
             }
         }
-        this.bricks[1][2].breakable=false;
-        this.bricks[6][2].breakable=false;
+        this.bricks[1][3].breakable=false;
+        this.bricks[7][3].breakable=false;
     }
     
     // Draw bricks on canvas
