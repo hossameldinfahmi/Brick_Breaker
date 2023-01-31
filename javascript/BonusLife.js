@@ -11,28 +11,16 @@ class BonuseLife {
   // Draw BounceLife on canvas
   draw() {
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillText("+", this.x - this.size / 3, this.y + this.size / 3);
+    // ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    // ctx.fill();
+    // ctx.fillText("+", this.x - this.size / 3, this.y + this.size / 3);
+    // ctx.fillStyle = "green";
 
-    ctx.fillStyle = "white";
-    ctx.closePath();
+    ctx.drawImage(heartImg, this.x - this.size, this.y - this.size, this.size * 2, this.size * 2);
    
-    // if(bonusCoin.visible == true){
-
-      
-
-    //     // Create gradient
-    //     // // Fill with gradient
-    //     // ctx.fillStyle = "blue";
-    //     // ctx.font = "14px Arial";
-    //     // ctx.fillText("+", this.x - this.size / 3, this.y + this.size / 3);
-    //     // ctx.closePath();
-    // }else{
-    //     ctx.fillStyle = "transparent";
-    // }
+  
     if(bonusCoin.visible == false){
-        ctx.fillStyle = "transparent"
+        this.size = 0;
     }
 
   }
@@ -40,6 +28,7 @@ class BonuseLife {
   // Move BounceLife on canvas
   move() {
     this.y += (this.speed * this.dy);
+    
 
   }
 }

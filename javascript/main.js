@@ -13,6 +13,11 @@ const popupHeader = document.querySelector(".pop-up-header");
 const bgSnd = new Audio("./soundEffects/bgSnd.mp3");
 const hitSnd = new Audio("./soundEffects/pop.mp3");
 
+// Bonuce Image
+const heartImg = new Image();
+heartImg.src = ".././imgs/heart.png";
+
+
 // globals
 let score = 0;
 let playerLife = 3;
@@ -59,6 +64,7 @@ const ball = new Ball({
   dy: 0,
 });
 
+
 // Create brick props
 const bricks = new Bricks(7, 5, {
   w: 60,
@@ -101,6 +107,8 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
+
+
 function drawBg() {
   for (i = 0; i < 50; i++) {
     // arc
@@ -114,6 +122,7 @@ function drawBg() {
     ctx.shadowColor = "white";
     ctx.shadowBlur = 15;
     ctx.stroke();
+    
   }
 }
 
@@ -245,6 +254,7 @@ function handleCollision() {
 //       }
 //     }
 
+
   // Brick collision
   bricks.bricks.forEach((column) => {
     column.forEach((brick) => {
@@ -283,14 +293,13 @@ function handleCollision() {
 
           brick.crashed--;
 
-          var randBrick = getRandomInt(45);
+          var randBrick = getRandomInt(15);
 
           if (randBrick == 2) {
             brick.hasBonus = true;
             bonusCoin.x = brick.x;
             bonusCoin.y = brick.y;
-            console.log(randBrick);
-            console.log(brick.hasBonus);
+            console.log("true");
           }
           // if(randBrick == 3){
           //    brick.breakable = false;
@@ -330,12 +339,13 @@ function handleCollision() {
           ball.y > brick.y && // top of ball and left of brick
           ball.y + ball.size > brick.y  // bottom of ball and left of brick
         ) {
-        if (ball.x < brick.x || ball.x > brick.x + brick.width) {
-            ball.dx *= -1;
-        } else {
-            ball.dy *= -1;
-        }
-
+            if (ball.x < brick.x) {
+                ball.dx *= -1;
+            } else if(ball.x + ball.size > brick.x + brick.w){
+                ball.dx *= -1;
+            }else {
+                ball.dy *= -1;
+            }
           hitSnd.play();
           hitSnd.play();
         }
