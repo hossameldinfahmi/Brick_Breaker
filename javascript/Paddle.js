@@ -40,13 +40,13 @@ class Paddle {
         var x = e.clientX;
         if (stage == 'gameRunning') {
             this.x = x - this.y + this.w;
-            
-            if(this.x <= 0){
+
+            if (this.x <= 0) {
                 this.x = 0;
             }
-            else if(this.x >= canvas.width - this.w){
+            else if (this.x >= canvas.width - this.w) {
                 this.x = canvas.width - this.w;
-            }            
+            }
         }
         canvas.style.cursor = "none";
     };

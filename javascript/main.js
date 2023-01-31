@@ -17,7 +17,6 @@ const hitSnd = new Audio("./soundEffects/pop.mp3");
 const heartImg = new Image();
 heartImg.src = "https://www.freepnglogos.com/uploads/heart-png/heart-image-13.png";
 
-
 // globals
 let score = 0;
 let playerLife = 3;
@@ -66,7 +65,6 @@ const ball = new Ball({
 });
 
 
-
 // Create brick props
 const bricks = new Bricks(countCol, countRow, {
   w: 80,
@@ -110,8 +108,6 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-
-
 function drawBg() {
   for (i = 0; i < 50; i++) {
     // arc
@@ -125,8 +121,6 @@ function drawBg() {
     ctx.shadowColor = "white";
     ctx.shadowBlur = 5;
     ctx.stroke();
-    
-    
   }
 }
 
@@ -154,7 +148,7 @@ function increaseScore() {
 function handleCollision() {
   // Wall collision (right/left)
   if (ball.x + ball.size > canvas.width || ball.x - ball.size < 0) {
-    ball.dx *= -1; 
+    ball.dx *= -1;
   }
 
   // Wall collision (top/bottom)
@@ -185,7 +179,7 @@ function handleCollision() {
     bonusCoin.y < paddle.y + paddle.h
   ) {
     if (playerLife < 4) {
-        playerLife++;
+      playerLife++;
     }
     bonusCoin.visible = false;
     bonusCoin.dy = -1;
@@ -197,7 +191,7 @@ function handleCollision() {
   bricks.bricks.forEach((column) => {
     column.forEach((brick) => {
       if (brick.visible && brick.breakable == true) {
-        
+
 
         if (
           ball.x + ball.size > brick.x && // left brick side check
@@ -205,18 +199,18 @@ function handleCollision() {
           ball.y + ball.size > brick.y && // top brick side check
           ball.y < brick.y + brick.h  // bottom brick side check
         ) {
-            
 
 
-            if (ball.x < brick.x) {
-                ball.dx *= -1;
-              } else if(ball.x + ball.size > brick.x + brick.w){
-                ball.dx *= -1;
-              }else {
-                ball.dy *= -1;
-              }
 
-          
+          if (ball.x < brick.x) {
+            ball.dx *= -1;
+          } else if (ball.x + ball.size > brick.x + brick.w) {
+            ball.dx *= -1;
+          } else {
+            ball.dy *= -1;
+          }
+
+
           hitSnd.play();
           hitSnd.play();
 
@@ -236,26 +230,28 @@ function handleCollision() {
             countRemainingBricks--;
           }
           if (countRemainingBricks == 0) {
-            popupHeader.textContent = "Congrats for winning";
-            finalScore.innerText = `Your Score: ${score}`;
-            popup.classList.add("open-popup");
-            bgSnd.pause();
-            ball.dx = 0;
-            ball.dy = 0;
-            stage = "gameDone";
+            delay(100).then(() => {
+              popupHeader.textContent = "Congrats for winning";
+              finalScore.innerText = `Your Score: ${score}`;
+              popup.classList.add("open-popup");
+              bgSnd.pause();
+              ball.dx = 0;
+              ball.dy = 0;
+              stage = "gameDone";
+            });
           }
         }
       }
     });
   });
-  
+
 
   bricks.bricks.forEach((column) => {
     column.forEach((brick) => {
       if (brick.breakable == false) {
         // ctx.fillStyle = "#ffff";
         if (
-          ball.x + ball.size  > brick.x && // left brick side check
+          ball.x + ball.size > brick.x && // left brick side check
           ball.x < brick.x + brick.w && // right brick side check
           ball.y + ball.size > brick.y && // top brick side check
           ball.y < brick.y + brick.h  // bottom brick side check
@@ -263,7 +259,7 @@ function handleCollision() {
         ) {
           ball.dx *= -1;
           ball.dy *= -1;
-        
+
           hitSnd.play();
         }
       }
@@ -273,7 +269,7 @@ function handleCollision() {
   // Bounse collision
 
   // Hit bottom wall - Lose
-  if (ball.y + ball.size > canvas.height ) {
+  if (ball.y + ball.size > canvas.height) {
     // stop ball and paddle movement
     stage = "gameWaiting";
     // reset ball and paddle positions
@@ -304,6 +300,10 @@ function repeatGame() {
   popup.classList.remove("open-popup");
 }
 
+function delay(time) {
+  return new Promise(resolve => setTimeout(resolve, time));
+}
+
 function mouseClicked() {
   if (stage === "gameWaiting") {
     console.log("detected click. changing game state!!");
@@ -316,22 +316,22 @@ function mouseClicked() {
 
 // Keydown event to move paddle and start game
 function keyDown(e) {
-    if (e.key === ' ' || e.key === 'Space' || e.key === 'Enter'){
-        e.preventDefault();
-    }
-    if (e.key === 'Right' || e.key === 'ArrowRight') {
-        paddle.dx = 1;
-    } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
-        paddle.dx = -1;
-    }
-    // if space key is pressed, start moving the ball
-    if ((e.key === ' ' || e.key === 'Space') && stage === 'gameWaiting') {
-        console.log('detected space button. changing game state!!');
-        stage = 'gameRunning';
-        // give ball initial direction to start moving
-        ball.dx = 1;
-        ball.dy = -1;
-    }
+  if (e.key === ' ' || e.key === 'Space' || e.key === 'Enter') {
+    e.preventDefault();
+  }
+  if (e.key === 'Right' || e.key === 'ArrowRight') {
+    paddle.dx = 1;
+  } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+    paddle.dx = -1;
+  }
+  // if space key is pressed, start moving the ball
+  if ((e.key === ' ' || e.key === 'Space') && stage === 'gameWaiting') {
+    console.log('detected space button. changing game state!!');
+    stage = 'gameRunning';
+    // give ball initial direction to start moving
+    ball.dx = 1;
+    ball.dy = -1;
+  }
 }
 
 // Keyup event to stop paddle
@@ -350,7 +350,7 @@ function draw() {
   drawBg();
   bricks.draw();
   ball.draw();
- 
+
 }
 
 // Update canvas drawing and animation

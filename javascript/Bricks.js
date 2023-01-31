@@ -12,14 +12,12 @@ class Bricks {
                 this.bricks[i][j] = { x, y, ...this.brickInfo };
             }
         }
-        this.bricks[1][3].breakable=false;
-        this.bricks[7][3].breakable=false;
+        this.bricks[1][3].breakable = false;
+        this.bricks[7][3].breakable = false;
     }
-    
+
     // Draw bricks on canvas
     draw() {
-       
-
 
         this.bricks.forEach(column => {
             column.forEach(brick => {
@@ -27,11 +25,10 @@ class Bricks {
                 ctx.rect(brick.x, brick.y, brick.w, brick.h);
                 ctx.closePath();
 
-                
-                 if (brick.breakable == false)
-                 {
-                 ctx.fillStyle = "#ccc";
-                 }
+
+                if (brick.breakable == false) {
+                    ctx.fillStyle = "#ccc";
+                }
 
                 else if (brick.crashed == 1) {
                     ctx.beginPath();
@@ -54,9 +51,10 @@ class Bricks {
                     // ctx.strokeStyle= "transparent";
                     ctx.lineWidth = 2;
                     ctx.stroke();
+
                 } else if (brick.visible == false) {
                     ctx.fillStyle = "transparent";
-                    if(brick.hasBonus == true){                        
+                    if (brick.hasBonus == true) {
                         bonusCoin.draw();
                         bonusCoin.move();
                     }
